@@ -57,7 +57,7 @@ const ElemV = () => (
 // // Возвращает миллисекунды
 // console.log("getMilliseconds(): ", date.getMilliseconds());
 /////////////////////////////////////////////////////////////
-
+const FIRST_DAY_MONTH = 1;
 const DAYS_IN_WEEK = 7;
 const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const Month = {
@@ -118,8 +118,18 @@ function getMonthData(year, month) {
   const startsDayOfMonth = getDayOfWeek(date);
   console.log(daysInMonth);
   console.log(startsDayOfMonth);
-  console.log();
-  // for(let i=)
+  console.log(daysInMonth + startsDayOfMonth);
+  let day = FIRST_DAY_MONTH;
+  for (let i = 0; i != (daysInMonth + startsDayOfMonth) / DAYS_IN_WEEK; i++) {
+    rez[i] = [];
+    for (let j = 0; j != DAYS_IN_WEEK; j++) {
+      if ((i === 0 && j < startsDayOfMonth) || day > daysInMonth) {
+        rez[i][j] = undefined;
+      } else {
+        rez[i][j] = new Date(year, month, day++);
+      }
+    }
+  }
 }
 
 getMonthData(2022, Month.February);
