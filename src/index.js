@@ -1,4 +1,5 @@
-import React from "react";
+import { selectOptions } from "@testing-library/user-event/dist/select-options";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import "./sass/main.css";
 //import App from "./App";
@@ -112,17 +113,16 @@ function isLeapYear(year) {
 //пеолучить данные месяца
 function getMonthData(year, month) {
   const rez = [];
-
   const date = new Date(year, month);
   const daysInMonth = getDaysInMonth(date);
   const startsDayOfMonth = getDayOfWeek(date);
-  console.log(daysInMonth);
-  console.log(startsDayOfMonth);
-  console.log(daysInMonth + startsDayOfMonth);
+  // console.log(daysInMonth);
+  // console.log(startsDayOfMonth);
+  // console.log(daysInMonth + startsDayOfMonth);
   let day = FIRST_DAY_MONTH;
-  for (let i = 0; i!= (daysInMonth + startsDayOfMonth) / DAYS_IN_WEEK; i++) {
+  for (let i = 0; i < (daysInMonth + startsDayOfMonth) / DAYS_IN_WEEK; i++) {
     rez[i] = [];
-    for (let j = 0; j!= DAYS_IN_WEEK; j++) {
+    for (let j = 0; j < DAYS_IN_WEEK; j++) {
       if ((i === 0 && j < startsDayOfMonth) || day > daysInMonth) {
         rez[i][j] = undefined;
       } else {
@@ -132,4 +132,115 @@ function getMonthData(year, month) {
   }
 }
 
-getMonthData(2022, Month.February);
+//getMonthData(2022, Month.February);
+////////////////////////////////////////////////////////
+const divContainer = React.createElement(
+  "div",
+  {
+    class: "div container",
+    id: "calendar-container",
+  },
+  "divContainer"
+);
+
+const btnPrev = React.createElement(
+  "button",
+  {
+    class: "btn",
+    id: "btn-prev-day",
+  },
+  "<"
+);
+
+const btnNext = React.createElement(
+  "button",
+  {
+    class: "btn",
+    id: "btn-prev-day",
+  },
+  ">"
+);
+
+ReactDOM.render(divContainer, document.getElementById("root"));
+///////////////////////////////////////////////////////////////////
+const arrowLeft = "<";
+const arrowRight = ">";
+const BtnLeft = () => <button>{arrowLeft}</button>;
+const BtnRight = () => <button>{arrowRight}</button>;
+
+const arrMonth = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+// const SelectMonth=()=>(
+// <select name="select">
+//   <option value="value1">{arrMonth[0]}</option>
+//   <option value="value2">{arrMonth[1]}</option>
+//   <option value="value3">{arrMonth[2]}</option>
+//   <option value="value4">{arrMonth[3]}</option>
+//   <option value="value5">{arrMonth[4]}</option>
+//   <option value="value6">{arrMonth[5]}</option>
+//   <option value="value7">{arrMonth[6]}</option>
+//   <option value="value8">{arrMonth[7]}</option>
+//   <option value="value9">{arrMonth[8]}</option>
+//   <option value="value10">{arrMonth[9]}</option>
+//   <option value="value11">{arrMonth[10]}</option>
+//   <option value="value12">{arrMonth[11]}</option>
+// </select>
+
+// );
+const SelectMonth = ({ arr }) => (
+  <ul>
+    {arr.map((elem) => (
+      <li>{elem}</li>
+    ))}
+  </ul>
+);
+
+ReactDOM.render(
+  <SelectMonth arr={arrMonth} />,
+  document.getElementById("root")
+);
+
+const FormCalendar = (props) => (
+  <>
+    <BtnLeft />
+    <SelectMonth arr={arrMonth} />
+    <BtnRight />
+  </>
+);
+/////////////////////////////////////////////////////////
+const favouriteBooks = [
+  { id: "id-1", name: "JS for beginners" },
+  { id: "id-2", name: "React basics" },
+  { id: "id-3", name: "React Router overview" },
+  { id: "id-4", name: "Redux in depth" },
+];
+
+const BookList = ({ books }) => (
+  <ul>
+    {books.map((book) => (
+      <li key={book.id}>{book.name}</li>
+    ))}
+  </ul>
+);
+
+console.log(
+  'document.getElementById("root")=',
+  document.getElementById("root")
+);
+
+// ReactDOM.render(
+//   <BookList books={favouriteBooks} />,
+//   document.getElementById("root")
+// );
