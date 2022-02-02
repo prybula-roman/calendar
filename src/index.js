@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import "./sass/main.css";
+//import App from "./App";
+//import reportWebVitals from "./reportWebVitals";
 
 /*
 const Profile = ({ name, email }) => (
@@ -120,9 +120,9 @@ function getMonthData(year, month) {
   console.log(startsDayOfMonth);
   console.log(daysInMonth + startsDayOfMonth);
   let day = FIRST_DAY_MONTH;
-  for (let i = 0; i != (daysInMonth + startsDayOfMonth) / DAYS_IN_WEEK; i++) {
+  for (let i = 0; i!= (daysInMonth + startsDayOfMonth) / DAYS_IN_WEEK; i++) {
     rez[i] = [];
-    for (let j = 0; j != DAYS_IN_WEEK; j++) {
+    for (let j = 0; j!= DAYS_IN_WEEK; j++) {
       if ((i === 0 && j < startsDayOfMonth) || day > daysInMonth) {
         rez[i][j] = undefined;
       } else {
